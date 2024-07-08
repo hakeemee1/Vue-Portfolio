@@ -5,11 +5,7 @@ import HomeView from '../views/HomeView.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
+  
   {
     path: '/about',
     name: 'about',
@@ -18,10 +14,25 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
+ 
   {
-    path: '/me',
-    name: 'me',
-    component: () => import(/* webpackChunkName: "hello-world" */ '../views/Me.vue')
+    path: '',
+    name: 'ToolBar',
+    component: () => import(/* webpackChunkName: "hello-world" */ '../views/ToolBar.vue'),
+    children : [
+      {
+        path: '/me',
+        name: 'me',
+        component: () => import(/* webpackChunkName: "hello-world" */ '../views/Me.vue')
+      },
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+      },
+      
+    ]
+    
   }
 ]
 
