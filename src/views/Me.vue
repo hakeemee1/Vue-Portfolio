@@ -1,11 +1,16 @@
 <template>
     <div>
-        <h1>me</h1>
+        <CardImg />
     </div>
 </template>
 
 <script>
+import CardImg from '../components/CardImg.vue'
 export default {
+    components: {
+        CardImg
+    },
+    
 
 }
 </script>
