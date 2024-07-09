@@ -25,7 +25,7 @@
           <v-col cols="12" md="4">
             <v-text-field
               v-model="score"
-              :rules="scoreRules"
+              :rules="scoreRules" 
               :counter="100"
               label="Score"
               required
@@ -35,7 +35,7 @@
       </v-container>
     </v-form>
     <v-row justify="center">
-      <v-col cols="12" sm="4" md="2">
+      <!-- <v-col cols="12" sm="4" md="2">
         <v-btn
           :disabled="!valid"
           class="mx-auto"
@@ -43,39 +43,71 @@
         >
           Calculate
         </v-btn>
+      </v-col> -->
+      <v-col cols="auto">
+        <v-dialog transition="dialog-top-transition" max-width="600">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              :disabled="!valid"
+              @click="validate"
+              color="primary"
+              v-bind="attrs"
+              v-on="on"
+              >Calculate</v-btn
+            >
+          </template>
+          <template v-slot:default="dialog">
+            <v-card>
+              <v-toolbar :color="color" dark>{{ `Grade: ${firstname} ${lastname}` }}</v-toolbar>
+              <v-card-text>
+                <div class="text-h2 pa-12">{{ `Grade: ${grade}` }}</div>
+              </v-card-text>
+              <v-card-actions class="justify-end">
+                <v-btn text @click="dialog.value = false">Close</v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
+import ModalGrade from "@/components/ModalGrade.vue";
 export default {
+  comments: {
+    ModalGrade,
+  },
   methods: {
     validate() {
-      if(this.score >= 80 && this.score <= 100) {
-        alert(`${this.firstname} ${this.lastname} => Grade: A, Score: ${this.score}`);
+      if (this.score >= 80 && this.score <= 100) {
+        this.grade = "A";
+        this.color = "lime darken-4";
+      } else if (this.score >= 70 && this.score <= 79) {
+        this.grade = "B";
+        this.color = "lime darken-1";
+      } else if (this.score >= 60 && this.score <= 69) {
+        this.grade = "C";
+        this.color = "orange darken-1";
+      } else if (this.score >= 50 && this.score <= 59) {
+        this.grade = "D";
+        this.color = "deep-orange darken-4";
+      } else {
+        this.grade = "F";
+        this.color = "black";
       }
-      else if(this.score >= 70 && this.score <= 79) {
-        alert(`${this.firstname} ${this.lastname} => Grade: B, Score: ${this.score}`);
-      }
-      else if(this.score >= 60 && this.score <= 69) {
-        alert(`${this.firstname} ${this.lastname} => Grade: C, Score: ${this.score}`);
-      }
-      else if(this.score >= 50 && this.score <= 59) {
-        alert(`${this.firstname} ${this.lastname} => Grade: D, Score: ${this.score}`);
-      }
-      else {
-        alert(`${this.firstname} ${this.lastname} => Grade: F, Score: ${this.score}`);
-      }
-    }
+    },
   },
   data: () => ({
+    color: '',
+    grade: '',
     valid: false,
     firstname: "",
     lastname: "",
     score: "",
     scoreRules: [
       (v) => !!v || "Score is required",
-      (v) => v <= 100 || "Score must be less than 100", 
+      (v) => v <= 100 || "Score must be less than 100",
     ],
     nameRules: [
       (v) => !!v || "Name is required",

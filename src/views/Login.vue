@@ -29,7 +29,7 @@ export default {
         login() {
             if(this.username === 'admin') {
                 localStorage.setItem('username', this.username)
-                this.$router.push({name: 'portfolio'})
+                this.$router.push({name: 'gradecal'})
             }else {
                 alert('Login failed')
             }
