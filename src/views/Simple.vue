@@ -10,6 +10,11 @@
         <v-btn @click="AlertName(item.color)">Hello</v-btn>
       </li>
     </ul>
+    <h1>{{ test }}</h1>
+    <v-btn v-if="test < 10" v-model="test" label="test" @click="plus"
+      >plus</v-btn
+    >
+    <v-btn v-else-if="test > 9" v-model="test" label="test" @click="minus">minus</v-btn>
   </div>
 </template>
 
@@ -17,6 +22,7 @@
 export default {
   data() {
     return {
+      test: 0,
       show: true,
       items: [
         { title: "Click Me", color: "red" },
@@ -29,6 +35,12 @@ export default {
   methods: {
     AlertName(item) {
       alert(item);
+    },
+    plus() {
+      this.test = this.test + 1;
+    },
+    minus() {
+      this.test = this.test - 1;
     },
   },
 };
