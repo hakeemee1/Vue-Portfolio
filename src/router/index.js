@@ -39,6 +39,11 @@ const routes = [
         name: 'gradecal',
         component: () => import(/* webpackChunkName: "hello-world" */ '../views/GradeCal.vue')
 
+      },
+      {
+        path: '/simple',
+        name: 'simple',
+        component: () => import(/* webpackChunkName: "hello-world" */ '../views/Simple.vue')
       }
       
     ]
