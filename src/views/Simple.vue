@@ -7,7 +7,7 @@
     <ul>
       <li v-for="item in items" :key="item.title">
         {{ item.title }}
-        <h1>{{ item.color }}</h1>
+        <v-btn @click="AlertName(item.color)">Hello</v-btn>
       </li>
     </ul>
   </div>
@@ -25,6 +25,11 @@ export default {
         { title: "Click Me 2", color: "yellow" },
       ],
     };
+  },
+  methods: {
+    AlertName(item) {
+      alert(item);
+    },
   },
 };
 </script>
