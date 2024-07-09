@@ -26,7 +26,7 @@
       </div>
 
       <v-spacer></v-spacer>
-
+      <span>{{username}}</span>
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
@@ -45,7 +45,17 @@
 
 <script>
 export default {
+  data () {
+    
+    return {
+      username: '',
+      
+    }
+  },
+  created(){
+    this.username = localStorage.getItem('username')
 
+  }
 }
 </script>
 
